@@ -1,0 +1,189 @@
+!DOCTYPE html>
+<html>
+<head>
+    <title>WebGIS Multi GeoJSON</title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+    <style>
+        #map {
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+// Inisialisasi map (Merak Belantung)
+var map = L.map('map').setView([-5.7, 105.57], 12);
+
+// Basemap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'OpenStreetMap'
+}).addTo(map);
+
+// Object untuk layer control
+var overlayMaps = {};
+
+// Fungsi load GeoJSON
+function loadGeoJSON(namaFile, namaLayer, warna) {
+
+    fetch(namaFile)
+    .then(res => res.json())
+    .then(data => {
+
+        var layer = L.geoJSON(data, {
+
+            pointToLayer: function(feature, latlng) {
+                return L.circleMarker(latlng, {
+                    radius: 6,
+                    fillColor: warna,
+                    color: "black",
+                    weight: 1,
+                    fillOpacity: 0.8
+                });
+            },
+
+            onEachFeature: function(feature, layer) {
+                layer.bindPopup(
+                    "<b>Layer:</b> " + namaLayer
+                );
+            }
+
+        });
+
+        overlayMaps[namaLayer] = layer;
+
+        layer.addTo(map);
+
+    })
+    .catch(err => console.log("Error load:", namaFile, err));
+}
+
+// Load 16 file
+loadGeoJSON("BATASPANTAI.geojson", "BATASPANTAI", "red");
+loadGeoJSON("BDRL.geojson", "BDRL", "blue");
+loadGeoJSON("GEZEBO.geojson", "GEZEBO", "green");
+loadGeoJSON("KAFE.geojson", "KAFE", "orange");
+loadGeoJSON("KEDUWARNA.geojson", "KEDUWARNA", "purple");
+loadGeoJSON("MUARA.geojson", "MUARA", "yellow");
+loadGeoJSON("PARKIRAN.geojson", "PARKIRAN", "cyan");
+loadGeoJSON("PINTUMASUK.geojson", "PINTUMASUK", "magenta");
+loadGeoJSON("RUMPUT.geojson", "RUMPUT", "brown");
+loadGeoJSON("SPOTFOTO.geojson", "SPOTFOTO", "black");
+loadGeoJSON("TOILET.geojson", "TOILET", "pink");
+loadGeoJSON("TUGU.geojson", "TUGU", "lime");
+loadGeoJSON("Perairan Dangkal.geojson", "Perairan Dangkal", "cyan");
+loadGeoJSON("Perairan 1M.geojson", "Perairan 1M", "Blue");
+loadGeoJSON("Perairan 5M.geojson", "Perairan 5M", "Red");
+loadGeoJSON("Perairan 10M.geojson", "Perairan 10M", "black");
+loadGeoJSON("Perairan 15M.geojson", "Perairan 15M", "pink");
+loadGeoJSON("Perairan 20M.geojson", "Perairan 20M", "lime");
+// Tambahkan Layer Control (delay biar semua kebaca)
+setTimeout(function() {
+    L.control.layers(null, overlayMaps).addTo(map);
+}, 2000);
+
+</script>
+
+</body>
+</html>!DOCTYPE html>
+<html>
+<head>
+    <title>WebGIS Multi GeoJSON</title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+    <style>
+        #map {
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+// Inisialisasi map (Merak Belantung)
+var map = L.map('map').setView([-5.7, 105.57], 12);
+
+// Basemap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'OpenStreetMap'
+}).addTo(map);
+
+// Object untuk layer control
+var overlayMaps = {};
+
+// Fungsi load GeoJSON
+function loadGeoJSON(namaFile, namaLayer, warna) {
+
+    fetch(namaFile)
+    .then(res => res.json())
+    .then(data => {
+
+        var layer = L.geoJSON(data, {
+
+            pointToLayer: function(feature, latlng) {
+                return L.circleMarker(latlng, {
+                    radius: 6,
+                    fillColor: warna,
+                    color: "black",
+                    weight: 1,
+                    fillOpacity: 0.8
+                });
+            },
+
+            onEachFeature: function(feature, layer) {
+                layer.bindPopup(
+                    "<b>Layer:</b> " + namaLayer
+                );
+            }
+
+        });
+
+        overlayMaps[namaLayer] = layer;
+
+        layer.addTo(map);
+
+    })
+    .catch(err => console.log("Error load:", namaFile, err));
+}
+
+// Load 16 file
+loadGeoJSON("BATASPANTAI.geojson", "BATASPANTAI", "red");
+loadGeoJSON("BDRL.geojson", "BDRL", "blue");
+loadGeoJSON("GEZEBO.geojson", "GEZEBO", "green");
+loadGeoJSON("KAFE.geojson", "KAFE", "orange");
+loadGeoJSON("KEDUWARNA.geojson", "KEDUWARNA", "purple");
+loadGeoJSON("MUARA.geojson", "MUARA", "yellow");
+loadGeoJSON("PARKIRAN.geojson", "PARKIRAN", "cyan");
+loadGeoJSON("PINTUMASUK.geojson", "PINTUMASUK", "magenta");
+loadGeoJSON("RUMPUT.geojson", "RUMPUT", "brown");
+loadGeoJSON("SPOTFOTO.geojson", "SPOTFOTO", "black");
+loadGeoJSON("TOILET.geojson", "TOILET", "pink");
+loadGeoJSON("TUGU.geojson", "TUGU", "lime");
+loadGeoJSON("Perairan Dangkal.geojson", "Perairan Dangkal", "cyan");
+loadGeoJSON("Perairan 1M.geojson", "Perairan 1M", "Blue");
+loadGeoJSON("Perairan 5M.geojson", "Perairan 5M", "Red");
+loadGeoJSON("Perairan 10M.geojson", "Perairan 10M", "black");
+loadGeoJSON("Perairan 15M.geojson", "Perairan 15M", "pink");
+loadGeoJSON("Perairan 20M.geojson", "Perairan 20M", "lime");
+// Tambahkan Layer Control (delay biar semua kebaca)
+setTimeout(function() {
+    L.control.layers(null, overlayMaps).addTo(map);
+}, 2000);
+
+</script>
+
+</body>
+</html>
